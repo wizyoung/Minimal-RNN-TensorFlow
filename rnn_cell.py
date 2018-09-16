@@ -90,7 +90,10 @@ if low_tf_version(tf_version):
         
     MinimalRNNCell = MinimalRNNCell_old
 else:
-    from tensorflow.python.ops.rnn_cell_impl import _LayerRNNCell
+    try:
+        from tensorflow.python.ops.rnn_cell_impl import _LayerRNNCell
+    except Exception:
+        from tensorflow.python.ops.rnn_cell_impl import LayerRNNCell as _LayerRNNCell
 
     class MinimalRNNCell_new(_LayerRNNCell):
         """MinimalRNN.
